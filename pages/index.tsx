@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
-  'pk_test_51JK7pGETrbGppB4vCljcag9qbvq04h917KYOsxF7FJztZRK8CFcVNRthV8yQauazOy7fbH9AD6v8VZZTfhyllt1T00ugpdOwTS'
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 export default function PreviewPage() {
   React.useEffect(() => {
