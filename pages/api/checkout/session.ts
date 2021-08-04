@@ -8,14 +8,14 @@ const stripe = new Stripe(process.env.customKey, {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['cards'],
+    payment_method_types: ['card'],
     line_items:[{
-      price: '{{PRICE_ID}}',
+      price: process.env.PRICE_ID,
       quantity: 1,
     }],
     mode: 'payment',
     success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'https://example.com/cancel',
+    cancel_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION-ID}` ,
 
   })
   res.status(200).json({ name: 'John Doe' })
