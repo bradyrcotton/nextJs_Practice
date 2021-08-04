@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/checkout/session": "pages/api/checkout/session.js",
-  "/checkout": "pages/checkout.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/checkout": "pages/checkout.js"
 }

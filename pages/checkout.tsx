@@ -7,7 +7,7 @@ export default function Checkout() {
         const {sessionId} = await fetch('/api/checkout/session', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                "content-type": "application/json"
             },
             body: JSON.stringify({quantity: 1})
         }).then(res => res.json())
