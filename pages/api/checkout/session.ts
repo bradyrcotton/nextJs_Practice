@@ -1,31 +1,22 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      // Create Checkout Sessions from body params.
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: [
-          'card',
-        ],
-        line_items: [
-          {
-            // TODO: replace this with the `price` of the product you want to sell
-            price: '{{PRICE_ID}}',
-            quantity: 1,
-          },
-        ],
-        mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
-      });
 
-      res.redirect(303, session.url);
-    } catch (err) {
-      res.status(err.statusCode || 500).json(err.message);
-    }
-  } else {
-    res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
-  }
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.customKey, {
+  apiVersion: '2020-08-27'
+});
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['cards'],
+    line_items:[{
+      price: '{{PRICE_ID}}',
+      quantity: 1,
+    }],
+    mode: 'payment',
+    success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'https://example.com/cancel',
+
+  })
+  res.status(200).json({ name: 'John Doe' })
 }
