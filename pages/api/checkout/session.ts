@@ -14,9 +14,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       quantity: 1,
     }],
     mode: 'payment',
-    success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION-ID}` ,
+    success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION-ID}`,
+    cancel_url: `${req.headers.origin}/checkout`,
 
   })
-  res.status(200).json({ name: 'John Doe' })
+  res.status(200).json({ seessionId: session.id })
 }
