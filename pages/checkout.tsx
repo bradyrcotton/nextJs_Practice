@@ -1,4 +1,6 @@
 import {loadStripe} from '@stripe/stripe-js';
+import Image from 'next/image'
+import IGSD from '../public/IGSD.jpg'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
@@ -16,11 +18,14 @@ export default function Checkout() {
             sessionId
         })
     }
+    
   return (
     <div>
-      <h1>Checkout</h1>
+      <h1>Sandbox Next/Stripe Checkout</h1>
+      <Image src={IGSD}/>
+      <h1>$20.00</h1>
       <button role='link' onClick={handleClick}>
-          Checkout
+          Buy Now 
       </button>
     </div>
   );
